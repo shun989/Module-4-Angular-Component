@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="card mt-2">
+    <div class="card-header">
+      Quản lý người dùng
+    </div>
+    <nav class="navbar navbar-light bg-light">
+      <div class="container-fluid">
+<!--        <button class="btn btn-success"></button>-->
+        <form class="d-flex col-6">
+          <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+          placeholder="Search">
+<!--          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--          <button class="btn btn-outline-success" type="submit">Search</button>-->
+        </form>
+      </div>
+    </nav>
+    <div class="card-body">
+      <table class="table">
+        <thead>
+        <tr>
+          <th scope="col">STT</th>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of users | filter:searchText ; let i = index ">
+          <th scope="row">{{i + 1}}</th>
+          <td>{{item.name}}</td>
+          <td>{{item.email}}</td>
+          <td>{{item.address}}</td>
+          <td>{{item.phone}}</td>
+          <td><a class="btn btn-danger" (click)="deleteUser(i)">Delete</a></td>
+        </tr>
+        </tbody>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+    </div>
+  </div>
+</div>
